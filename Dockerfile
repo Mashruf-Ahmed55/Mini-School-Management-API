@@ -2,26 +2,20 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Copy package files and lockfile
+# Copy package files and install deps
 COPY package*.json ./
-COPY package-lock.json ./
-
-# Install dependencies using npm ci
 RUN npm ci
 
+# Copy rest of the code
 COPY . .
 
-# Generate Prisma client (build-time operation)
+# Generate Prisma client
 RUN npx prisma generate
 
-RUN npx prisma migrate deploy
-
-RUN npm run prisma:seed
-
-# Build the application
+# Build NestJS app
 RUN npm run build
 
 EXPOSE 3000
 
-# Run migrations, seed, and start application at runtime
-CMD ["sh", "-c", "npm run start:prod"]
+# CMD: run migrations, seed, then start app
+CMD npx prisma migrate deploy && npm run prisma:seed && npm run start:prod
