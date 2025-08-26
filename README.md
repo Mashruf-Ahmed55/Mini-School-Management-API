@@ -1,98 +1,175 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 🏫 Mini School Management API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A complete, production-ready **School Management API** built with **NestJS**, **PostgreSQL**, and **Prisma ORM**, featuring JWT authentication, role-based access, and full student/class management.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+## 🔥 Features
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### Authentication & Authorization
 
-## Project setup
+- JWT access & refresh tokens
+- Role-based access control (**Admin, Teacher, Student**)
+- Password hashing with **bcryptjs**
+- Protected routes with **Guards**
 
-```bash
-$ pnpm install
-```
+### Student Management
 
-## Compile and run the project
+- Create students (Admin only)
+- List students with pagination & search
+- Get student details
+- Automatic user account creation
 
-```bash
-# development
-$ pnpm run start
+### Class Management
 
-# watch mode
-$ pnpm run start:dev
+- Create classes (Admin only)
+- Enroll students in classes
+- Get class details and student lists
+- Prevent duplicate enrollments
 
-# production mode
-$ pnpm run start:prod
-```
+### Database Design
 
-## Run tests
+- Proper relationships between entities
+- Indexes for performance
+- Data validation and constraints
 
-```bash
-# unit tests
-$ pnpm run test
+### Technical Stack
 
-# e2e tests
-$ pnpm run test:e2e
+- **Backend:** NestJS + TypeScript
+- **Database:** PostgreSQL
+- **ORM:** Prisma
+- **Validation:** class-validator & class-transformer
+- **Documentation:** Postman
+- **Dockerized** for easy setup
+- **Database seeding script** included
 
-# test coverage
-$ pnpm run test:cov
-```
+---
 
-## Deployment
+## 🚀 Quick Start Guide
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### 1. Clone & Install Dependencies
 
 ```bash
-$ pnpm install -g @nestjs/mau
-$ mau deploy
+git clone <your-repo>
+cd school-management-api
+npm install
+cp .env.example .env  # Update with your database URL
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 2. Start Database
 
-## Resources
+```bash
+docker-compose up -d postgres
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+### 3. Setup Database
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```bash
+npx prisma db push
+npm run prisma:seed
+```
 
-## Support
+### 4. Start Development
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
+npm run start:dev
+```
 
-## Stay in touch
+- API is available at: [http://localhost:3000](http://localhost:3000)
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+---
 
-## License
+## ⚙️ Environment Configuration (`.env`)
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+```env
+DATABASE_URL="postgresql://postgres:password@localhost:5432/school_management"
+JWT_SECRET="your-super-secret-jwt-key"
+JWT_REFRESH_SECRET="your-super-secret-refresh-key"
+JWT_EXPIRATION_TIME="15m"
+JWT_REFRESH_EXPIRATION_TIME="7d"
+```
+
+---
+
+## 📦 Package.json Scripts
+
+```json
+{
+  "prisma:generate": "prisma generate",
+  "prisma:push": "prisma db push",
+  "prisma:migrate": "prisma migrate dev",
+  "prisma:seed": "tsx prisma/seed.ts",
+  "db:reset": "prisma migrate reset --force"
+}
+```
+
+---
+
+## 🛠️ API Endpoints
+
+### Authentication
+
+| Method | Endpoint        | Description                     |
+| ------ | --------------- | ------------------------------- |
+| POST   | `/auth/signup`  | User registration               |
+| POST   | `/auth/login`   | User login                      |
+| POST   | `/auth/logout`  | User logout (requires JWT)      |
+| GET    | `/auth/profile` | Get user profile (requires JWT) |
+
+### Students
+
+| Method | Endpoint        | Description                       |
+| ------ | --------------- | --------------------------------- |
+| POST   | `/students`     | Create student (Admin only)       |
+| GET    | `/students`     | List all students (Admin/Teacher) |
+| GET    | `/students/:id` | Get student details               |
+
+### Classes
+
+| Method | Endpoint                | Description                             |
+| ------ | ----------------------- | --------------------------------------- |
+| POST   | `/classes`              | Create class (Admin only)               |
+| GET    | `/classes`              | List all classes                        |
+| GET    | `/classes/:id`          | Get class details                       |
+| POST   | `/classes/:id/enroll`   | Enroll student in class (Admin/Teacher) |
+| GET    | `/classes/:id/students` | Get students of a class                 |
+
+---
+
+## 🧪 Testing with Sample Credentials
+
+```json
+# Admin
+{
+  "email": "admin@school.com",
+  "password": "admin123"
+}
+
+# Teacher
+{
+  "email": "teacher@school.com",
+  "password": "teacher123"
+}
+
+# Student
+{
+  "email": "alice.johnson@student.school.com",
+  "password": "student123"
+}
+```
+
+---
+
+## 📄 Postman Collection
+
+Save this as `school-management-api.postman_collection.json` and import into Postman.
+
+---
+
+## 📝 Notes
+
+- JWT access token expires in 15 minutes; refresh token expires in 7 days.
+- Role-based guards ensure only authorized users can perform actions.
+- Database is pre-seeded with admin, teacher, and student accounts.
+
+💡 **Pro Tip:** Keep your `.env` secrets safe! Never push them to public repos.
