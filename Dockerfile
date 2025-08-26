@@ -1,18 +1,16 @@
 FROM node:20-alpine
 
-# Enable corepack and prepare pnpm
-RUN corepack enable && corepack prepare pnpm@latest --activate
+# Install pnpm
+RUN npm install -g pnpm
 
 WORKDIR /app
 
-# Copy package files and pnpm lockfile
 COPY package*.json ./
-COPY pnpm-lock.yaml ./
 
-# Install dependencies using pnpm
-RUN pnpm install --frozen-lockfile
+# Check if pnpm-lock.yaml exists, if not use regular install
+COPY pnpm-lock.yaml* ./
+RUN if [ -f pnpm-lock.yaml ]; then pnpm install --frozen-lockfile; else pnpm install; fi
 
-# Copy application code
 COPY . .
 
 # Generate Prisma client
