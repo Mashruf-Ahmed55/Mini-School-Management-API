@@ -6,9 +6,6 @@ COPY package*.json ./
 RUN npm ci
 
 COPY . .
-RUN npx prisma migrate dev
-
-RUN npm run prisma:seed
 
 RUN npm run build
 
